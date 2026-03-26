@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--页面标题-->
+    <title>鲤鱼交通集团</title>
+<!--引入外部样式文件，统一管理页面样式-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/partials.css">
+<!--预留扩展位：可引入额外CSS文件-->
+</head>
+<body>
+<!--header 由 fragments 注入-->
+    <div data-include="header"></div>
+
+<!--主视觉横幅区-->
+    <main id="snap-container">
+<!--第一页-->
+        <section id="first-screen" class="snap-page">
+            <div class="hero-banner" id="section-banner">
+                    <!-- 将首页图片改为背景图：可通过 CSS 或行内 style 修改 background-image -->
+                    <div class="banner-bg" role="img" aria-label="站点横幅" style="background-image: url('assets/images/abcd.png');">
+                        <!-- 文字使用 data-text 属性以便生成倒影 -->
+                        <div class="hero-title" data-text="欢迎访问鲤铁官网">欢迎访问鲤铁官网</div>
+                <div class="hero-inner">
+                    <div class="banner-label">
+                        <span>首页图</span>
+                    </div>
+                </div>
+                    </div>
+            </div>
+            <!-- 预留底部功能区 -->
+        </section>
+<!--第二页开始-->
+        <section id="second-screen" class="snap-page">
+<!--原始六个区块-->
+            <main>
+                <section id="section-notices" class="page-section">
+                    <div class="content-extend">
+                        <div class="section-card">
+                            <h2>通知公告</h2>
+                            <article class="preview-item">
+                                <h3>本网站开通啦！</h3>
+                                <p class="meta">2026-03-18 | 来源：本站</p>
+                                <p class="summary">部分信息未及时更新，详情请查看通告页面。</p>
+                            </article>
+                            <p><a href="views/notices.html" style="color:blue;text-decoration:underline;text-underline-offset:2px">查看全部通告 &gt;</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-line-map" class="page-section">
+                    <div class="content-extend">
+                        <div class="section-card">
+                            <h2>线网示意</h2>
+                            <!-- <div class="map-preview">
+                                <img src="assets/images/全图.png" alt="线网预览" style="max-width:320px; border-radius:6px;">
+                            </div> -->
+                            <p><a href="views/linemap.html" style="color:blue;text-decoration:underline;text-underline-offset:2px">查看完整线网 &gt;</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-navigation" class="page-section">
+                    <div class="content-extend">
+                        <div class="section-card">
+                            <h2>线路导航</h2>
+                            <p>外部线路导航工具，点击<a href="https://routeguide.liyv.me" target="_blank" style="color:blue;text-decoration:underline;text-underline-offset:2px">此处</a>前往。</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-planning" class="page-section">
+                    <div class="content-extend">
+                        <div class="section-card">
+                            <h2>建设规划</h2>
+                            <article class="preview-item">
+                                <h3><a href="views/lineplan.html">近期线路扩展计划发布</a></h3>
+                                <p class="meta">2026-03-18</p>
+                                <p class="summary">若干新线路规划正在评审阶段，详情请前往规划页查看。</p>
+                            </article>
+                            <p><a href="views/lineplan.html" style="color:blue;text-decoration:underline;text-underline-offset:2px">查看全部规划 &gt;</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-about" class="page-section">
+                    <div class="content-extend">
+                        <div class="section-card">
+                            <h2>关于公司</h2>
+                            <article class="preview-item">
+                                <h3><a href="views/aboutcompany.html#liyu-transport-group">鲤鱼交通集团</a></h3>
+                                <p class="meta">最后更新时间：2026-03-18</p>
+                                <p class="summary">更多详情请查看关于页面。</p>
+                            </article>
+                            <p><a href="views/aboutcompany.html" style="color:blue;text-decoration:underline;text-underline-offset:2px">了解更多 &gt;</a></p>
+                        </div>
+                    </div>
+                </section>
+
+            </main><!-- 六个区块结束 -->
+        </section><!-- 第二页结束 -->
+    </main>
+<!--预留扩展区：可添加内容-->
+    <!--<section class="content-extend"></section>-->
+
+<!--网站页脚：全站底部信息-->
+    <!--footer 由 fragments 注入-->
+        <div data-include="footer"></div>
+<!--引入外部交互脚本，统一管理逻辑-->
+    <script src="assets/js/include-fragments.js"></script>
+    <script src="assets/js/main.js"></script>
+<!--预留扩展位：可引入统计脚本、地图插件、额外JS文件-->
+</body>
+</html>

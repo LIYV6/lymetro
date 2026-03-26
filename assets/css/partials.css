@@ -1,0 +1,229 @@
+/* partials.css
+   集中管理 header/footer 相关样式以便快速查找与修改
+   仅包含 header/footer 必要样式，其他通用样式仍在 style.css 中。
+*/
+
+/* 在 fragments 未加载完成时隐藏主体以避免闪烁 */
+html.fragments-loading body > :not(.site-header):not(.main-footer) {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* 头部导航样式作用：固定在页面顶部，层级最高，保证在banner上方显示*/
+.site-header {
+    width: 100%;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background: #0b66a3; /* 顶部深蓝色 */
+    color: var(--white-color);
+}
+
+/*头部容器：居中布局，最大宽度*/
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    position: relative; /* 允许内部绝对定位汉堡按钮 */
+}
+
+/* logo区域 */
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.home-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    line-height: 0; /*避免svg偏移 */
+}
+
+.home-icon svg {
+    display: block; /*修复响应时 svg 偏离*/
+    width: 22px;
+    height: 22px;
+}
+.home-icon:hover {
+    background: rgba(255,255,255,0.06);
+} 
+
+.nav-toggle {
+    display: none;
+    background: none;
+    color: var(--white-color);
+    font-size: 22px;
+    line-height: 1;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+}
+
+/* 主导航菜单 */
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+.nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    position: relative;
+}
+
+/* 导航交互（伪元素 underline 与 hover） */
+.nav-link.active { 
+    background: #ff8a00; 
+    color: #fff; }
+.nav-link::after { 
+    content: '';
+    position: absolute;
+    bottom:0; 
+    left:0; 
+    width:0;
+    height:2px;
+    background:var(--nav-hover-color); 
+    transition: width 0.3s ease; }
+.nav-link:hover { color: var(--nav-hover-color); }
+.nav-link:hover::after { width:100%; }
+
+/* 移动端导航（当前项目使用 .nav-toggle + .mobile-nav-panel）
+ 说明：在窄屏时隐藏主导航，显示右侧汉堡按钮（使用 .nav-toggle），点击展开右侧滑出菜单*/
+
+.nav-toggle{ display: none; background:none; color:var(--white-color); font-size:22px; line-height:1; width:44px; height:44px; border-radius:6px; }
+
+.mobile-nav-panel{ position:fixed; top:var(--header-height); right:0; width:260px; max-width:80vw; background:#0b66a3; color:white; box-shadow:-8px 0 24px rgba(0,0,0,0.15); transform:translateY(-10px); opacity:0; visibility:hidden; transition: opacity 220ms ease, transform 220ms ease; --menu-clip-x:100%; --menu-clip-y:0px; --menu-clip-radius:0px; clip-path: circle(var(--menu-clip-radius) at var(--menu-clip-x) var(--menu-clip-y)); z-index:1000; border-bottom-left-radius:8px; border-top-left-radius:8px; overflow:hidden; }
+
+.mobile-nav-panel.active{ transform:translateY(0); opacity:1; visibility:visible; left:0; right:0; width:100%; max-width:none; border-bottom-left-radius:0; border-top-left-radius:0; transition: clip-path 360ms ease, opacity 220ms ease, transform 220ms ease; }
+
+.mobile-nav-panel .mobile-nav-list{ display:flex; flex-direction:column; }
+.mobile-nav-panel .mobile-nav-item a{ display:block; padding:14px 18px; color:white; border-bottom:1px solid rgba(255,255,255,0.06); }
+
+.nav-toggle.active{ font-size:20px; }
+
+/* 半透明遮罩，当移动面板展开时显示，点击可关闭 */
+.mobile-nav-overlay{ position:fixed; inset:var(--header-height) 0 0 0; top:var(--header-height); left:0; right:0; bottom:0; background:rgba(0,0,0,0.35); opacity:0; visibility:hidden; transition:opacity 200ms ease; z-index:990; }
+.mobile-nav-overlay.active{ opacity:1; visibility:visible; }
+
+/* 窄屏断点 */
+@media (max-width: 900px){ .main-nav{ display:none; } .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; position:absolute; right:16px; top:50%; transform:translateY(-50%); } }
+@media (max-width:420px){ .mobile-nav-panel{ width:86vw; } }
+
+
+/*页脚样式作用：展示版权、备案信息，预留友情链接扩展*/
+.main-footer {
+    width: 100%;
+    background-color: #f0f0f0;/* 灰色背景 */
+    color: #333;
+    padding: 32px 0;
+}
+/*页脚导航网格布局：4列等宽*/
+.footer-nav-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+/*单个导航列标题样式*/
+.footer-nav-column h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--mtr-text-white);
+}
+
+/*导航链接列表样式*/
+.footer-nav-column ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-nav-column ul li a {
+    font-size: 14px;
+    color: #cccccc;
+    transition: color 0.2s ease;
+}
+/*全站：页脚链接颜色统一为深灰，便于阅读（可全局覆盖）*/
+.main-footer .footer-nav-column ul li a { color: #555; }
+
+/*链接hover效果：变白，显示下划线*/
+.footer-nav-column ul li a:hover {
+    color: var(--mtr-text-white);
+    text-decoration: underline;
+}
+
+/*页脚分隔线*/
+.footer-divider {
+    width: 100%;
+    height: 1px;
+    background-color: #444444;
+    margin-bottom: 25px;
+}
+
+/*版权信息区域样式*/
+.footer-copyright {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-copyright p {
+    font-size: 14px;
+    color: #999999;
+}
+
+/*版权链接样式*/
+.copyright-links {
+    display: flex;
+    gap: 20px;
+}
+
+.copyright-links a {
+    font-size: 13px;
+    color: #999999;
+    transition: color 0.2s ease;
+}
+
+.copyright-links a:hover {
+    color: var(--mtr-text-white);
+    text-decoration: underline;
+}
+
+/*响应式适配样式作用：针对不同屏幕尺寸调整布局，保证移动端、平板端的浏览体验，适配主流设备尺寸*/
+/* 响应式（手机）调优：版权区堆叠*/
+@media (max-width: 768px) {
+    .footer-copyright { flex-direction: column; align-items: flex-start; }
+    .copyright-links { flex-wrap: wrap; }
+}
+/*小屏手机适配：屏幕宽度小于480px时生效*/
+@media (max-width: 480px) {
+/*页脚导航：2列改1列*/
+    .footer-nav-grid {
+        grid-template-columns: 1fr;
+    }
+/*顶部快捷链接*/
+    .top-quick-links a:nth-child(n+2) {
+        display: none;
+    }
+}
