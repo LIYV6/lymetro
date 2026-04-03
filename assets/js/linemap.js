@@ -37,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
     };
      let lineInfo = {};
     // 保存 promise，以便在用户点击时等待数据就绪
-    const lineInfoPromise = fetch('./data/line-info.json')//需要注意修改
+    // data 位于 assets/data/ 下，使用相对于站点根或当前路径的路径以避免 /views/ 下的 404
+    // 使用以站点根为基准的绝对路径，避免在 /views/ 子路径下请求错误
+    const lineInfoPromise = fetch('/assets/data/line-info.json')
         .then(r => r.json())
         .then(data => { lineInfo = data || {}; return lineInfo; })
         .catch(err => {

@@ -128,21 +128,22 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
 @media (max-width:420px){ .mobile-nav-panel{ width:86vw; } }
 
 
-/*页脚样式作用：展示版权、备案信息，预留友情链接扩展*/
+/* 页脚样式：展示版权、备案信息，预留友情链接扩展 */
 .main-footer {
     width: 100%;
-    background-color: #f0f0f0;/* 灰色背景 */
+    background-color: #f0f0f0; /* 灰色背景 */
     color: #333;
     padding: 32px 0;
 }
-/*页脚导航网格布局：4列等宽*/
+
+/* 页脚导航网格布局：4列等宽 */
 .footer-nav-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     margin-bottom: 40px;
 }
-/*单个导航列标题样式*/
+
 .footer-nav-column h4 {
     font-size: 16px;
     font-weight: 600;
@@ -150,7 +151,6 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
     color: var(--mtr-text-white);
 }
 
-/*导航链接列表样式*/
 .footer-nav-column ul {
     display: flex;
     flex-direction: column;
@@ -162,21 +162,50 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
     color: #cccccc;
     transition: color 0.2s ease;
 }
-/*全站：页脚链接颜色统一为深灰，便于阅读（可全局覆盖）*/
+
+/* 全站：页脚链接颜色统一为深灰，便于阅读（可全局覆盖） */
 .main-footer .footer-nav-column ul li a { color: #555; }
 
-/*链接hover效果：变白，显示下划线*/
 .footer-nav-column ul li a:hover {
     color: var(--mtr-text-white);
     text-decoration: underline;
 }
 
-/*页脚分隔线*/
+/* 页脚分隔线 */
 .footer-divider {
     width: 100%;
     height: 1px;
     background-color: #444444;
-    margin-bottom: 25px;
+    margin-bottom: 12px;
+}
+
+/* 办公地址：标题与两行地址并排显示，地址字号比标题小一号，左对齐并紧贴标题 */
+.footer-address {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px; /* 标题与地址的水平间距 */
+    margin: 8px 0 18px;
+}
+.footer-address .footer-small-title {
+    margin: 0;
+    font-size: 16px; /* 与页脚小标题一致 */
+    font-weight: 600;
+    color: var(--mtr-text-white);
+}
+.footer-address .address-lines {
+    display: inline-block;
+}
+.footer-address .address-lines p {
+    margin: 0 0 6px 0;
+    color: #555; /* 和页脚链接相近的深灰 */
+    font-size: 14px; /* 比标题小一号 */
+    text-align: left;
+    line-height: 1.3;
+}
+
+@media (max-width: 768px) {
+    .footer-address { flex-direction: column; gap: 6px; }
 }
 
 /*版权信息区域样式*/
