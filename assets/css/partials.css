@@ -71,6 +71,9 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
     border-radius: 6px;
 }
 
+/* 确保汉堡按钮始终可点击（提高 z-index）并且不被隐藏的 overlay 阻挡 */
+.nav-toggle { z-index: 1202; }
+
 /* 主导航菜单 */
 .main-nav {
     flex: 1;
@@ -90,9 +93,9 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
 }
 
 /* 导航交互（伪元素 underline 与 hover） */
-.nav-link.active { 
-    background: #ff8a00; 
-    color: #fff; }
+.nav-link.active {
+    color: #fff;
+}
 .nav-link::after { 
     content: '';
     position: absolute;
@@ -110,9 +113,21 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
 
 .nav-toggle{ display: none; background:none; color:var(--white-color); font-size:22px; line-height:1; width:44px; height:44px; border-radius:6px; }
 
-.mobile-nav-panel{ position:fixed; top:var(--header-height); right:0; width:260px; max-width:80vw; background:#0b66a3; color:white; box-shadow:-8px 0 24px rgba(0,0,0,0.15); transform:translateY(-10px); opacity:0; visibility:hidden; transition: opacity 220ms ease, transform 220ms ease; --menu-clip-x:100%; --menu-clip-y:0px; --menu-clip-radius:0px; clip-path: circle(var(--menu-clip-radius) at var(--menu-clip-x) var(--menu-clip-y)); z-index:1000; border-bottom-left-radius:8px; border-top-left-radius:8px; overflow:hidden; }
+.mobile-nav-panel{ position:fixed; top:var(--header-height); left:0; right:0; width:100%; max-width:none; background:#0b66a3; color:white; box-shadow:0 4px 18px rgba(0,0,0,0.12); transform-origin: top; transform: scaleY(0); opacity:0; visibility:hidden; transition: transform 360ms cubic-bezier(.16,.84,.24,1), opacity 220ms ease; z-index:1115; overflow:hidden; }
 
-.mobile-nav-panel.active{ transform:translateY(0); opacity:1; visibility:visible; left:0; right:0; width:100%; max-width:none; border-bottom-left-radius:0; border-top-left-radius:0; transition: clip-path 360ms ease, opacity 220ms ease, transform 220ms ease; }
+.mobile-nav-panel.active{ transform-origin: top; transform: scaleY(1); opacity:1; visibility:visible; }
+
+/* 可定制移动面板内选项背景与透明度：
+   --mobile-nav-item-bg-rgb : 三元 RGB 值（逗号分隔），默认白色 '255,255,255'
+   --mobile-nav-item-bg-opacity : 背景透明度，默认 1（不透明）
+   --mobile-nav-item-text-color : 文字颜色，默认与面板主题色对比
+   修改位置：assets/css/partials.css 中此处，或在全局 :root 中覆盖
+*/
+.mobile-nav-panel {
+    --mobile-nav-item-bg-rgb: 255,255,255;
+    --mobile-nav-item-bg-opacity: 1;
+    --mobile-nav-item-text-color: #0b66a3;
+}
 
 .mobile-nav-panel .mobile-nav-list{ display:flex; flex-direction:column; }
 .mobile-nav-panel .mobile-nav-item a{ display:block; padding:14px 18px; color:white; border-bottom:1px solid rgba(255,255,255,0.06); }
@@ -120,8 +135,10 @@ html.fragments-loading body > :not(.site-header):not(.main-footer) {
 .nav-toggle.active{ font-size:20px; }
 
 /* 半透明遮罩，当移动面板展开时显示，点击可关闭 */
-.mobile-nav-overlay{ position:fixed; inset:var(--header-height) 0 0 0; top:var(--header-height); left:0; right:0; bottom:0; background:rgba(0,0,0,0.35); opacity:0; visibility:hidden; transition:opacity 200ms ease; z-index:990; }
-.mobile-nav-overlay.active{ opacity:1; visibility:visible; }
+.mobile-nav-overlay{ position:fixed; inset:var(--header-height) 0 0 0; top:var(--header-height); left:0; right:0; bottom:0; background:rgba(0,0,0,0.35); opacity:0; visibility:hidden; transition:opacity 200ms ease; z-index:1100; }
+/* 默认不捕获指针事件，避免遮挡 header 的交互；激活时恢复 pointer-events 以响应点击关闭 */
+.mobile-nav-overlay{ pointer-events: none; }
+.mobile-nav-overlay.active{ opacity:1; visibility:visible; pointer-events: auto; }
 
 /* 窄屏断点 */
 @media (max-width: 900px){ .main-nav{ display:none; } .nav-toggle{ display:inline-flex; align-items:center; justify-content:center; position:absolute; right:16px; top:50%; transform:translateY(-50%); } }
