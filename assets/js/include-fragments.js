@@ -37,7 +37,7 @@
         // 在哪些注入容器内修复链接（query selector）
         linkFixContainers: ['.site-header', '.main-footer'],
         // 视图目录下常见文件名，linkFix 时会对匹配的相对链接前缀 'views/'
-        viewFilenames: ['info.html', 'linemap.html', 'moreinfo.html'],
+        viewFilenames: ['info.html','lineinfo.html', 'linemap.html', 'moreinfo.html'],
         // fetch 缓存策略，默认为 browser default
         fetchCache: 'default', // 可选 'no-store','no-cache','reload','force-cache','only-if-cached'
         // 是否将加载结果暴露为 window.__fragmentsLoaded（保持兼容），可关闭以避免全局污染
